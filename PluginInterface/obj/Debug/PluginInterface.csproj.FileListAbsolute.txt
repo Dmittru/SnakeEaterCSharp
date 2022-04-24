@@ -1,0 +1,6 @@
+D:\SnakeBattle\PluginInterface\bin\Debug\PluginInterface.dll
+D:\SnakeBattle\PluginInterface\bin\Debug\PluginInterface.pdb
+D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.csproj.AssemblyReference.cache
+D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.csproj.CoreCompileInputs.cache
+D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.dll
+D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.pdb
