@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\bin\Debug\My_snake_AI_v1_2.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\bin\Debug\My_snake_AI_v1_2.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\bin\Debug\PluginInterface.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\bin\Debug\PluginInterface.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\obj\Debug\My_snake_AI_v1_2.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\obj\Debug\My_snake_AI_v1_2.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\obj\Debug\My_snake_AI_v1_2.csproj.CopyComplete
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\obj\Debug\My_snake_AI_v1_2.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\My_snake_AI_v1_2\obj\Debug\My_snake_AI_v1_2.pdb

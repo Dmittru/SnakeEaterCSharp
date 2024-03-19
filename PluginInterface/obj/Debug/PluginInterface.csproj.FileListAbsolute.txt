@@ -4,3 +4,9 @@ D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.csproj.AssemblyReferenc
 D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.csproj.CoreCompileInputs.cache
 D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.dll
 D:\SnakeBattle\PluginInterface\obj\Debug\PluginInterface.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\PluginInterface\bin\Debug\PluginInterface.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\PluginInterface\bin\Debug\PluginInterface.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\PluginInterface\obj\Debug\PluginInterface.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\PluginInterface\obj\Debug\PluginInterface.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\PluginInterface\obj\Debug\PluginInterface.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\PluginInterface\obj\Debug\PluginInterface.pdb

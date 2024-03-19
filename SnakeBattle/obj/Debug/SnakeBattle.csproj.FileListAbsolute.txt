@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\bin\Debug\SnakeBattle.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\bin\Debug\SnakeBattle.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\bin\Debug\PluginInterface.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\bin\Debug\PluginInterface.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\obj\Debug\SnakeBattle.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\obj\Debug\SnakeBattle.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\obj\Debug\SnakeBattle.csproj.CopyComplete
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\obj\Debug\SnakeBattle.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\SnakeBattle\obj\Debug\SnakeBattle.pdb

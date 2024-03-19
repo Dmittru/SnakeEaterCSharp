@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\bin\Debug\BotRandomSnake.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\bin\Debug\BotRandomSnake.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\bin\Debug\PluginInterface.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\bin\Debug\PluginInterface.pdb
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\obj\Debug\BotRandomSnake.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\obj\Debug\BotRandomSnake.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\obj\Debug\BotRandomSnake.csproj.CopyComplete
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\obj\Debug\BotRandomSnake.dll
+C:\Users\User\Desktop\CSharp\CSharp-Lab5\BotRandomSnake\obj\Debug\BotRandomSnake.pdb

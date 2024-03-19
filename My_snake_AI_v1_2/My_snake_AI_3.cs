@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using PluginInterface;
 
-namespace My_snake_AI_v1_2
+namespace My_snake_AI_v1_3
 {
     public class My_snake_AI_3 : ISmartSnake
     {
@@ -15,180 +15,151 @@ namespace My_snake_AI_v1_2
         private DateTime dt = DateTime.Now;
         private static Random rnd = new Random();
 
-        // вводим переменную для камней
+        // переменные для камней и еды
         List<Point> Mystones;
+        List<Point> Food;
+        Point targetFood;
 
         public void Startup(Size size, List<Point> stones)
         {
-            Name = "My_snake_AI_3";
+            Name = "Snake Eater (Blue)";
             Color = Color.Blue;
-            // заполняем нашу переменную камнями
             Mystones = stones;
         }
 
         public void Update(Snake snake, List<Snake> enemies, List<Point> food, List<Point> dead)
-        {            
-            // число врагов            
-            int Count_wariors = enemies.Count;
+        {
+            // поиск еды
+            Food = food;
 
-            // Если есть враги
-            if (enemies.Count != 0)
+            // если есть еда
+            if (Food.Count != 0)
             {
-                // переменная врага
-                Snake Warior;
-                // добавляем первого по списку врага и начинаем охоту
-                Warior = enemies[rnd.Next(0, enemies.Count)];
-
-                // если кого-то убили, то выберем нового противника рандомно
-                if (Count_wariors != enemies.Count )
+                // если нет цели или цель съедена
+                if (targetFood == null || !Food.Contains(targetFood))
                 {
-                    Count_wariors = enemies.Count;
-                    Warior = enemies[rnd.Next(0, enemies.Count)];
-
-                    
-                }
-                // добавляем к камням мертвых, чтобы их тоже можно было огибать
-                foreach (Point item in dead)
-                {
-                    Mystones.Add(item);
+                    // поиск ближайшей еды
+                    targetFood = FindNearestFood(snake.Position, Food);
                 }
 
-                // отладка вывод координат
-                Console.WriteLine("Position: {0} ", snake.Position );
+                // алгоритм поиска в ширину
+                Queue<Point> queue = new Queue<Point>();
+                queue.Enqueue(snake.Position);
+                Dictionary<Point, Point> cameFrom = new Dictionary<Point, Point>();
+                Dictionary<Point, int> distanceToFood = new Dictionary<Point, int>();
+                distanceToFood[snake.Position] = 0;
 
-                // 3 четверть (-,-) 1.1
-                // сначала определяем , какое растояние больше по оси Х  или по оси Y
-                if (snake.Position.X < Warior.Position.X | snake.Position.Y < Warior.Position.Y)
+                while (queue.Count > 0)
                 {
-                    // если дальше по Х то
-                    if (snake.Position.X - Warior.Position.X < snake.Position.Y - Warior.Position.Y)
+                    Point current = queue.Dequeue();
+
+                    // если нашли еду
+                    if (current == targetFood)
                     {
-                        // если на пути направо нет камня И НЕТ ХВОСТА, двигаемся вправо, иначе по часовой (вниз)
-                        if (!Mystones.Contains(new Point(snake.Position.X + 1, snake.Position.Y)) & !snake.Tail.Contains(new Point(snake.Position.X + 1, snake.Position.Y)))
+                        // восстанавливаем путь
+                        List<Point> path = new List<Point>();
+                        while (current != snake.Position)
                         {
-                            Console.WriteLine("Move.Right\t1.1");
-                            Direction = Move.Right;
+                            path.Add(current);
+                            current = cameFrom[current];
                         }
-                        // иначе по часовой (вниз)
-                        else if (!Mystones.Contains(new Point(snake.Position.X, snake.Position.Y + 1)) & !snake.Tail.Contains(new Point(snake.Position.X , snake.Position.Y + 1)))
+                        path.Reverse();
+
+                        // двигаемся к еде
+                        if (path.Count >= 0)
                         {
-                            Console.WriteLine("Move.Down\t1.1");
-                            Direction = Move.Down;
+                            Direction = GetDirection(snake.Position, path[0]);
                         }
-                        // проверяем возможность хода вверх
-                        else if (!Mystones.Contains(new Point(snake.Position.X, snake.Position.Y - 1)) & !snake.Tail.Contains(new Point(snake.Position.X , snake.Position.Y - 1)))
-                        {
-                            Console.WriteLine("Move.Up\t1.1");
-                            Direction = Move.Up;
-                        }
-                        // проверяем возможность хода вверх
-                        else
-                        {
-                            Console.WriteLine("Reverse = true\t1.1");
-                            Reverse = true;
-                            Console.WriteLine("Reverse = true => Move.Up\t1.1");
-                            Direction = Move.Up;
-                        }
+                        break;
                     }
-                    // если дальше по Y то 1.2
-                    else if (snake.Position.X - Warior.Position.X > snake.Position.Y - Warior.Position.Y)
-                    {
-                        // если на пути вниз нет камня, двигаемся вниз, иначе по часовой (влево)
-                        if (!Mystones.Contains(new Point(snake.Position.X, snake.Position.Y + 1)) & !snake.Tail.Contains(new Point(snake.Position.X, snake.Position.Y + 1)))
-                        {
-                            Console.WriteLine("Move.Down\t1.2");
-                            Direction = Move.Down;
-                        }
-                        // иначе по часовой (влево)
-                        else if (!Mystones.Contains(new Point(snake.Position.X - 1, snake.Position.Y )) & !snake.Tail.Contains(new Point(snake.Position.X - 1, snake.Position.Y)))
-                        {
-                            Console.WriteLine("Move.Left\t1.2");
-                            Direction = Move.Left;
-                        }                        
-                        // проверяем возможность хода направо
-                        else if (!Mystones.Contains(new Point(snake.Position.X + 1, snake.Position.Y)) & !snake.Tail.Contains(new Point(snake.Position.X + 1, snake.Position.Y)))
-                        {
-                            Console.WriteLine("Move.Right\t1.2");
-                            Direction = Move.Right;
-                        }
-                        // проверяем возможность хода направо
-                        else
-                        {
-                            Console.WriteLine("Reverse = true\t1.2");
-                            Reverse = true;
-                            Console.WriteLine("Reverse = true => Move.Right\t1.2");
-                            Direction = Move.Right;
-                        }
 
+                    // добавляем соседние точки
+                    foreach (Point neighbor in GetNeighbors(current))
+                    {
+                        if (!Mystones.Contains(neighbor) && !cameFrom.ContainsKey(neighbor))
+                        {
+                            queue.Enqueue(neighbor);
+                            cameFrom[neighbor] = current;
+                            distanceToFood[neighbor] = distanceToFood[current] + 1;
+                        }
                     }
                 }
 
-                // 1 четверть (+,+) 1.3
-                // сначала определяем , какое растояние больше по оси Х  или по оси Y
-                if (snake.Position.X > Warior.Position.X | snake.Position.Y > Warior.Position.Y)
-                {
-                    // если дальше по Х то
-                    if (snake.Position.X - Warior.Position.X > snake.Position.Y - Warior.Position.Y)
-                    {
-                        // если на пути налево нет камня, двигаемся влево, иначе по часовой (вверх)
-                        if (!Mystones.Contains(new Point(snake.Position.X - 1, snake.Position.Y)) & !snake.Tail.Contains(new Point(snake.Position.X - 1, snake.Position.Y)))
-                        {
-                            Console.WriteLine("Move.Left\t1.3");
-                            Direction = Move.Left;
-                        }
-                        // иначе по часовой (вверх)
-                        else if (!Mystones.Contains(new Point(snake.Position.X , snake.Position.Y - 1)) & !snake.Tail.Contains(new Point(snake.Position.X, snake.Position.Y - 1)))
-                        {
-                            Console.WriteLine("Move.Up\t1.3");
-                            Direction = Move.Up;
-                        }
-                         // проверяем возможность хода вниз
-                        else if (!Mystones.Contains(new Point(snake.Position.X , snake.Position.Y + 1)) & !snake.Tail.Contains(new Point(snake.Position.X , snake.Position.Y + 1)))
-                        {
-                            Console.WriteLine("Move.Down\t1.3");
-                            Direction = Move.Down;
-                        }
-                        // проверяем возможность хода вниз
-                        else
-                        {
-                            Console.WriteLine("Reverse = true\t1.3");
-                            Reverse = true;
-                            Console.WriteLine("Reverse = true => Move.Down\t1.3");
-                            Direction = Move.Down;
-                        }
-                    }
-                    // если дальше по Y то 1.4
-                    else if (snake.Position.X - Warior.Position.X < snake.Position.Y - Warior.Position.Y)
-                    {
-                        // если на пути налево нет камня, двигаемся вверх, иначе по часовой (вправо)
-                        if (!Mystones.Contains(new Point(snake.Position.X, snake.Position.Y - 1)) & !snake.Tail.Contains(new Point(snake.Position.X , snake.Position.Y - 1)))
-                        {
-                            Console.WriteLine("Move.Up\t1.4");
-                            Direction = Move.Up;
-                        }
-                        // иначе по часовой (вверх)
-                        else if (!Mystones.Contains(new Point(snake.Position.X + 1, snake.Position.Y)) & !snake.Tail.Contains(new Point(snake.Position.X + 1, snake.Position.Y)))
-                        {
-                            Console.WriteLine("Move.Right\t1.4");
-                            Direction = Move.Right;
-                        }
-                         // проверяем возможность хода налево
-                        else if (!Mystones.Contains(new Point(snake.Position.X - 1, snake.Position.Y)) & !snake.Tail.Contains(new Point(snake.Position.X -1, snake.Position.Y)))
-                        {
-                            Console.WriteLine("Move.Left\t1.4");
-                            Direction = Move.Left;
-                        }
-                        // проверяем возможность хода влево
-                        else
-                        {
-                            Console.WriteLine("Reverse = true\t1.4");
-                            Reverse = true;
-                            Console.WriteLine("Reverse = true => Move.Left\t1.4");
-                            Direction = Move.Left;
-                        }
+                // Если не нашли путь к еде, выбираем ближайшую свободную точку
 
+                if (Direction == Move.Nothing)
+                {
+                    int minDistance = int.MaxValue;
+                    Point nearestFreePoint = new Point();
+
+                    foreach (Point neighbor in GetNeighbors(snake.Position))
+                    {
+                        if (!Mystones.Contains(neighbor))
+                        {
+                            int distance = Math.Abs(neighbor.X - snake.Position.X) + Math.Abs(neighbor.Y - snake.Position.Y);
+                            if (distance < minDistance)
+                            {
+                                minDistance = distance;
+                                nearestFreePoint = neighbor;
+                            }
+                        }
                     }
+
+                    Direction = GetDirection(snake.Position, nearestFreePoint);
                 }
+            }
+        }
+
+        // поиск ближайшей еды
+        private Point FindNearestFood(Point position, List<Point> food)
+        {
+            int minDistance = int.MaxValue;
+            Point nearestFood = new Point();
+
+            foreach (Point f in food)
+            {
+                int distance = Math.Abs(position.X - f.X) + Math.Abs(position.Y - f.Y);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestFood = f;
+                }
+            }
+
+            return nearestFood;
+        }
+
+        // получение списка соседних точек
+        private List<Point> GetNeighbors(Point point)
+        {
+            List<Point> neighbors = new List<Point>();
+
+            neighbors.Add(new Point(point.X + 1, point.Y));
+            neighbors.Add(new Point(point.X - 1, point.Y));
+            neighbors.Add(new Point(point.X, point.Y + 1));
+            neighbors.Add(new Point(point.X, point.Y - 1));
+
+            return neighbors;
+        }
+
+        // определение направления движения
+        private Move GetDirection(Point from, Point to)
+        {
+            if (to.X > from.X)
+            {
+                return Move.Right;
+            }
+            else if (to.X < from.X)
+            {
+                return Move.Left;
+            }
+            else if (to.Y > from.Y)
+            {
+                return Move.Down;
+            }
+            else
+            {
+                return Move.Up;
             }
         }
     }
